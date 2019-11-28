@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Answered Questions</h1>
+
+{% if questions %}
+<ul class="all-questions">
+    {% for question in questions %}
+    <li>
+        <a href="{{ question.get_absolute_url }}">{{ question.question_text }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>You have not answered any questions yet.</p>
+{% endif %}
+{% endblock %}

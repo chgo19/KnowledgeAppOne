@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="margin-bottom: 40px;">All Questions on {{ category.title }}</h1>
+
+{% for question in category.question_set.all %}
+<div class="category-question">
+    {% if question.image %}
+    <div class="image-div">
+        <img src="{{ question.image.url }}" alt="Some error occured, please reload the page for image.">
+    </div>
+    {% endif %}
+    <h2>{{ question.question_text }}</h2>
+    <form method="POST" action="{{ question.get_answer_url }}" class="options">
+        {% csrf_token %}
+        <input type="hidden" name="page" id="pageid" value="cd">
+        {% for choice in question.choice_set.all %}
+        <label for="choice{{ choice.id }}" class="question-choice">
+            <input type="radio" id="choice{{ choice.id }}" name="user_choice" value="{{ choice.id }}" required>
+            {{ choice.choice_text }}
+        </label>
+        {% endfor %}
+        <div class="single-submit-button">
+            <button type="submit" class="question-button">Submit</button>
+        </div>
+    </form>
+</div>
+{% endfor %}
+
+{% if not category.question_set.all %}
+<h2>Sorry, no questions in this category as of now.</h2>
+<a href="{% url 'categorys' %}">Please view other categories.</a>
+{% endif %}
+<!-- 
+<p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>
+<p><strong>Summary:</strong> {{ book.summary }}</p>
+<p><strong>ISBN:</strong> {{ book.isbn }}</p>
+<p><strong>Language:</strong> {{ book.language }}</p>
+<p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+    <h4>Copies</h4>
+
+    {% for copy in book.bookinstance_set.all %}
+    <hr>
+    <p
+        class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+        {{ copy.get_status_display }}
+    </p>
+    {% if copy.status != 'a' %}
+    <p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>
+    {% endif %}
+    <p><strong>Imprint:</strong> {{ copy.imprint }}</p>
+    <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
+    {% endfor %}
+</div> -->
+{% endblock %}

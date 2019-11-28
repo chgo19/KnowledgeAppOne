@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if question.image %}
+<div class="image-div">
+    <img src="{{ question.image.url }}" alt="Some error occured, please reload the page for image.">
+</div>
+{% endif %}
+
+<h1>{{ question.question_text }}</h1>
+<form method="POST" action="{{ question.get_answer_url }}" class="options">
+    {% csrf_token %}
+    <input type="hidden" name="page" id="pageid" value="qd">
+    {% for choice in question.choice_set.all %}
+    <label for="choice{{ choice.id }}" class="question-choice">
+        <input type="radio" id="choice{{ choice.id }}" name="user_choice" value="{{ choice.id }}" required>
+        {{ choice.choice_text }}
+    </label>
+    {% endfor %}
+    <div class="single-submit-button">
+        <button type="submit" class="question-button">Submit</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Chishiki Hanto</h1>
+<p>Welcome to a simple knowledge app, a website developed by <em>BC<sup>2</sup></em>!</p>
+<p>To start click the links on the left navbar!</p>
+<h2>Dynamic content</h2>
+<p>The Quiz app has the following record counts:</p>
+<ul>
+    <li><strong>Categories:</strong> {{ num_categorys }}</li>
+    <li><strong>Questions:</strong> {{ num_questions }}</li>
+    <li><strong>Total Users:</strong> {{ num_users }}</li>
+    <li><strong>Total User Responses:</strong> {{ num_user_answers }}</li>
+    <li><strong>Total Choices of all Questions:</strong> {{ num_choices }}</li>
+</ul>
+{% endblock %}
