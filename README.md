@@ -5,7 +5,7 @@ It is actually no quiz as that would require some time limit for answering any q
 
 To run it you would need -
 1. **Python 3.6** (or greater)
-2. **Django 2.2 **(or greater)
+2. **Django 2.2**(or greater)
 
 After installing those two just go into project directory and run `python manage.py runserver`
 
